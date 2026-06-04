@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use, fork, reference, or build upon this project, please cite it as described below."
+type: software
+title: "LLM Reliability Platform"
+authors:
+  - family-names: "Mosisian"
+    given-names: "Narek"
+repository-code: "https://github.com/narek-mosisian/llm-reliability-platform"
+url: "https://github.com/narek-mosisian/llm-reliability-platform"
+abstract: "A production-grade LLMOps platform for RAG-based AI assistants with an LLM gateway, evaluation gates, observability, cost controls, fallback routing, and cloud deployment."
+keywords:
+  - ai-engineering
+  - llmops
+  - mlops
+  - rag
+  - retrieval-augmented-generation
+  - llm-gateway
+  - fastapi
+  - nextjs
+  - opentelemetry
+  - prometheus
+  - grafana
+  - platform-engineering
+license: "Apache-2.0"
+version: "0.1.0"
