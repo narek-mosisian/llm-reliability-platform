@@ -1,0 +1,76 @@
+name: Feature request
+description: Propose a new user-facing or platform capability.
+title: "feat: "
+labels:
+  - "type: feature"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for new platform capabilities, API features, frontend features or RAG-related functionality.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the feature in one or two concise paragraphs.
+      placeholder: Add a short summary of the requested feature.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Select the main project area.
+      options:
+        - API
+        - Web
+        - RAG
+        - LLM Gateway
+        - Observability
+        - Deployment
+        - Security
+        - Semantic Web
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain the problem or limitation this feature addresses.
+      placeholder: Describe the current limitation or missing capability.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the expected implementation or behavior.
+      placeholder: Describe the proposed behavior, API, UI or workflow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: List the conditions that must be true for this issue to be considered done.
+      placeholder: |
+        - The feature is implemented.
+        - Tests are added or updated.
+        - Documentation is updated where relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Describe what evidence should be attached or linked after implementation.
+      placeholder: Screenshots, test output, eval report, trace, dashboard panel or API response example.
+    validations:
+      required: false

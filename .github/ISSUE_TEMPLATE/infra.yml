@@ -1,0 +1,68 @@
+name: Infrastructure task
+description: Plan or implement infrastructure, deployment, Docker, CI or operations work.
+title: "infra: "
+labels:
+  - "type: infra"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for Docker, deployment, CI/CD, reverse proxy, server setup, backups and operational automation.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the infrastructure task.
+      placeholder: Add a short summary of the infrastructure work.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Select the main infrastructure area.
+      options:
+        - Docker
+        - Docker Compose
+        - GitHub Actions
+        - Hetzner
+        - Cloudflare
+        - Caddy
+        - PostgreSQL
+        - Redis
+        - Prometheus
+        - Grafana
+        - OpenTelemetry
+        - Backup and restore
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation notes
+      description: Describe the expected implementation approach.
+      placeholder: Describe files, services, configuration or workflows that should be added or changed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: Describe how this infrastructure task should be validated.
+      placeholder: Smoke test, health check, CI run, local Docker Compose startup or deployment check.
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and rollback
+      description: Describe operational risks and rollback considerations.
+      placeholder: Mention downtime, secret handling, migration risk, rollback steps or backup requirements.
+    validations:
+      required: false

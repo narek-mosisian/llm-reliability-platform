@@ -1,0 +1,86 @@
+name: Bug report
+description: Report something that is broken or behaving unexpectedly.
+title: "fix: "
+labels:
+  - "type: bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for reproducible bugs, broken behavior, failed checks or unexpected errors.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the bug clearly and briefly.
+      placeholder: Add a short summary of the issue.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Select the affected project area.
+      options:
+        - API
+        - Web
+        - RAG
+        - LLM Gateway
+        - Evaluation
+        - Observability
+        - Deployment
+        - Security
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest reproducible sequence of steps.
+      placeholder: |
+        1. Start the local environment.
+        2. Send request to ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what should happen.
+      placeholder: Describe the expected result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Describe what actually happens.
+      placeholder: Describe the actual result, error message or failure mode.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Add relevant logs, screenshots or command output.
+      placeholder: Paste logs or attach screenshots.
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Add relevant environment details.
+      placeholder: OS, browser, Python version, Node version, Docker version or deployment environment.
+    validations:
+      required: false
