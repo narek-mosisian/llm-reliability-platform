@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Python tooling
+.ipynb_checkpoints/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
+.pnpm-store/
+.turbo/
+.vercel/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# direnv
+.direnv/
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# IDE / editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Docker
+docker-compose.override.yml
+
+# Local runtime data
+data/
+tmp/
+uploads/
+apps/api/uploads/
+apps/api/data/
+
+# Evidence generated locally
+evidence/tmp/
+
+# Grafana / Prometheus local data if mounted as folders
+infra/grafana/data/
+infra/prometheus/data/
+
+# PostgreSQL local data if mounted as folders
+infra/postgres/data/

@@ -1,0 +1,76 @@
+name: Evaluation task
+description: Add or improve evaluation datasets, metrics, gates or reports.
+title: "eval: "
+labels:
+  - "type: evals"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for golden datasets, evaluation metrics, citation checks, regression gates and evaluation reports.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the evaluation work.
+      placeholder: Add a short summary of the evaluation task.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: eval-type
+    attributes:
+      label: Evaluation type
+      description: Select the main type of evaluation work.
+      options:
+        - Golden dataset
+        - Evaluation runner
+        - Citation validation
+        - Refusal validation
+        - Regression threshold
+        - CI eval gate
+        - Eval report artifact
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: dataset
+    attributes:
+      label: Dataset or cases
+      description: Describe the dataset, cases or examples affected by this issue.
+      placeholder: List case IDs, dataset files or new test scenarios.
+    validations:
+      required: false
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics
+      description: Describe which metrics are affected.
+      placeholder: answer_correctness, citation_coverage, citation_validity, refusal_correctness, latency, cost.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: List the expected completion criteria.
+      placeholder: |
+        - Eval cases are added or updated.
+        - Eval runner handles the new cases.
+        - CI reports are produced.
+        - Regression thresholds are documented.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Describe the expected evidence after implementation.
+      placeholder: Link eval report, CI artifact or before/after score comparison.
+    validations:
+      required: false

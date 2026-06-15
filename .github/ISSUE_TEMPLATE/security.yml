@@ -1,0 +1,67 @@
+name: Security task
+description: Track security hardening, abuse prevention, secret handling or LLM security work.
+title: "security: "
+labels:
+  - "type: security"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not use public issues for suspected vulnerabilities, leaked secrets or exploitable production security bugs.
+        Use a private security advisory or private maintainer contact for sensitive reports.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the security task without exposing sensitive details.
+      placeholder: Add a short summary of the security improvement or risk.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: security-area
+    attributes:
+      label: Security area
+      description: Select the main security area.
+      options:
+        - Secret handling
+        - Prompt injection
+        - Insecure output handling
+        - Sensitive information disclosure
+        - Model denial of service
+        - Upload safety
+        - Rate limiting
+        - Cost abuse prevention
+        - Dependency security
+        - Deployment hardening
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risk
+      description: Describe the risk or weakness being addressed.
+      placeholder: Explain what could go wrong and why it matters.
+    validations:
+      required: true
+
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Proposed mitigation
+      description: Describe the planned mitigation.
+      placeholder: Describe the expected security control, documentation update, check or implementation change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation
+      description: Describe how the mitigation should be validated.
+      placeholder: Tests, review checklist, CI check, manual verification or documentation evidence.
+    validations:
+      required: true

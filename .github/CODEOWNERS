@@ -1,0 +1,17 @@
+* @narek-mosisian
+
+.github/ @narek-mosisian
+docs/ @narek-mosisian
+
+README.md @narek-mosisian
+CONTRIBUTING.md @narek-mosisian
+SECURITY.md @narek-mosisian
+CHANGELOG.md @narek-mosisian
+LICENSE @narek-mosisian
+NOTICE @narek-mosisian
+CITATION.cff @narek-mosisian
+
+apps/api/ @narek-mosisian
+apps/web/ @narek-mosisian
+infra/ @narek-mosisian
+evals/ @narek-mosisian
