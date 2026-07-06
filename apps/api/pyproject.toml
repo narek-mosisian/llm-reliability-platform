@@ -1,0 +1,42 @@
+[project]
+name = "llm-reliability-api"
+version = "0.1.0"
+description = "Backend API for the LLM Reliability Platform."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115.0",
+  "pydantic>=2.10.0",
+  "uvicorn[standard]>=0.34.0",
+]
+
+[dependency-groups]
+dev = ["httpx>=0.28.0", "mypy>=1.15.0", "pytest>=8.3.0", "ruff>=0.11.0"]
+
+[build-system]
+requires = ["hatchling"]
+# Hatchling is a build tool for Python packages that builds an installable Python package (wheel package) from the code.
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_reliability"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+# Ruff tests the code as if Python 3.12 were the target.
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+# E style errors, F real code errors, I import sorting, B possible bugs, UP modern Python notation, S security notes.
+ignore = ["S101"]
+# Ignores assert warnings. Makes sense because assert is normal in tests.
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+# very strict type testing
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
