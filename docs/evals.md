@@ -101,12 +101,21 @@ estimated_cost_per_answer
 
 ## Reports
 
-Evaluation reports should be written to:
+Evaluation reports should be written to two different locations depending on their purpose.
+
+Generated technical reports from local or CI runs should be written to:
 
 ```text
 evals/reports/
+```
+
+Curated evidence reports for the README, evidence page or recruiter-facing documentation should be written to:
+
+```text
 evidence/eval-reports/
 ```
+
+This separation keeps raw/generated reports separate from stable public evidence artifacts.
 
 Report formats:
 
