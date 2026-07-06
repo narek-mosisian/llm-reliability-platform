@@ -16,6 +16,7 @@ The format follows the spirit of Keep a Changelog, and this project uses semanti
 - Runbook placeholders.
 - Architecture decision record placeholders.
 - FastAPI backend skeleton with versioned API router, health endpoint, OpenAPI schema and tests.
+- Backend core configuration, structured logging setup and consistent API error responses.
 
 ### Changed
 
