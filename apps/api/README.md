@@ -6,12 +6,17 @@ This service will provide the FastAPI backend for document ingestion, RAG, LLM g
 
 ## Current scope
 
-This initial skeleton includes:
+This initial backend setup includes:
 
 - FastAPI application factory
+- Pydantic Settings-based application configuration
+- Structured logging setup
 - Versioned API router
 - Health endpoint
+- Consistent API error responses
 - Basic test coverage for the health endpoint
+- Basic test coverage for configured settings behavior
+- Basic test coverage for application error responses
 - Basic test coverage for the OpenAPI schema
 
 ## Local development
@@ -56,9 +61,6 @@ http://localhost:8000/api/v1/health
 
 The next implementation steps will add:
 
-- Backend configuration loading
-- Structured logging
-- Error handling
 - Docker Compose integration
 - PostgreSQL
 - Redis
