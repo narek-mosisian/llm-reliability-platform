@@ -10,7 +10,7 @@ updates:
       timezone: "Europe/Berlin"
     labels:
       - "type: chore"
-      - "type: security"
+      - "type: dependency"
       - "priority: p2"
     commit-message:
       prefix: "chore"
