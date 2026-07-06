@@ -32,11 +32,11 @@ flowchart TD
     ingestion --> parser[PDF Parser]
     ingestion --> chunker[Deterministic Chunker]
     ingestion --> embeddings[Embedding Provider]
-    embeddings --> pgvector[(PostgreSQL + pgvector)]
+    embeddings --> db[(PostgreSQL + pgvector)]
 
     api --> rag[RAG Pipeline]
     rag --> retrieval[Vector Retrieval]
-    retrieval --> pgvector
+    retrieval --> db
     rag --> context[Context Builder]
     rag --> citations[Citation Verifier]
 
@@ -59,7 +59,7 @@ flowchart TD
     observability --> grafana[Grafana]
 
     api --> redis[(Redis)]
-    api --> postgres[(PostgreSQL)]
+    api --> db
 ```
 
 ## Backend
@@ -95,7 +95,7 @@ Main responsibilities:
 
 ## Data Storage
 
-The first version uses PostgreSQL with pgvector.
+The v1.0 architecture uses PostgreSQL with pgvector as the primary data store.
 
 Stored data includes:
 
@@ -157,7 +157,7 @@ Important signals:
 
 ## Deployment
 
-The first production-like deployment target is:
+The v1.0 production-like deployment target is:
 
 ```text
 Hetzner VPS + Cloudflare + Docker Compose + Caddy
