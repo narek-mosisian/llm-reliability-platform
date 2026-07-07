@@ -1,0 +1,135 @@
+:root {
+  color-scheme: dark;
+  --background: #0f172a;
+  --foreground: #e5e7eb;
+  --muted: #94a3b8;
+  --card: #111827;
+  --border: #1f2937;
+  --accent: #38bdf8;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* Padding and borders are included in the total width. This makes layouts easier. */
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgb(56 189 248 / 18%), transparent 32rem),
+    var(--background);
+    /* Dark background with a blue light gradient in the top left. */
+  color: var(--foreground);
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* Links inherit the text color and have no underline. */
+
+.page-shell { /* main page container */
+  width: min(1120px, calc(100% - 32px));
+  /* Maximum width of 1120px, but with spacing on small screens. */
+  margin: 0 auto; /* centers the container */
+  padding: 96px 0; /* large spacing at the top and bottom */
+}
+
+.hero {
+  max-width: 840px;
+}
+
+.eyebrow {
+  margin: 0 0 16px; /* 16px bottom margin */
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  /* responsive font size: minimum 2.75rem, maximum 5.5rem
+     The browser initially attempts to use this middle value,
+     but only if it lies between the minimum and the maximum. */
+  line-height: 0.95; /* very tight line height */
+  letter-spacing: -0.06em; /* letters closer together */
+}
+
+.hero-copy {
+  max-width: 720px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex; /* side by side */
+  flex-wrap: wrap; /* wrap text when space is limited */
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hero-actions a {
+  border: 1px solid var(--border);
+  border-radius: 999px; /* very well-rounded */
+  padding: 12px 18px;
+  background: rgb(17 24 39 / 80%);
+  font-weight: 700;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* four columns of equal width */
+  gap: 16px;
+  margin-top: 64px;
+}
+
+.feature-card {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  background: rgb(17 24 39 / 78%);
+}
+
+.feature-card h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.feature-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* rule for screens up to 900px wide */
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* rule for screens up to 560px wide */
+@media (max-width: 560px) {
+  .page-shell {
+    padding: 56px 0;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
