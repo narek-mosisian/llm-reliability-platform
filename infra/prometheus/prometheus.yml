@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s # every 15 seconds: query otel-collector:8889/metrics
+  evaluation_interval: 15s # evaluates rules every 15 seconds
+  # (no rules have been defined yet, but the global setting is already prepared)
+
+scrape_configs: # services that Prometheus should collect metrics from
+  - job_name: prometheus # it should monitor itself
+    static_configs: # the targets are permanently entered, not discovered dynamically
+      - targets:
+          - prometheus:9090 # also provides its own metrics
+
+  - job_name: otel-collector # OpenTelemetry Collector
+    static_configs:
+      - targets:
+          - otel-collector:8889
