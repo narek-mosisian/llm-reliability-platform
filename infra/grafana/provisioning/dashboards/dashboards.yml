@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: LLM Reliability Dashboards
+    orgId: 1 # standard organization
+    folder: LLM Reliability
+    type: file # Dashboards are loaded from files (JSON files in the file system)
+    disableDeletion: false # if a dashboard file is deleted, Grafana is allowed to delete the dashboard too
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

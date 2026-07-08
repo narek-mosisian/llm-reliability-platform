@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=none
+
+receivers:
+  otlp: # Open Telemetry Protocol (standard protocol that apps use to send data to the OpenTelemetry Collector)
+    protocols:
+      grpc: # communication protocol, often for service-to-service communication
+        endpoint: 0.0.0.0:4317 # standard port for OTLP over gRPC
+      http:
+        endpoint: 0.0.0.0:4318 # standard port for OTLP over HTTP
+
+processors: # this defines how received data is processed before it is passed on
+  batch: # collect multiple data points → forward together
+
+exporters: # this defines where the collector outputs data
+  debug:
+    verbosity: basic # collector writes received data to its own logs so that you can later see if data is arriving using "docker compose logs otel-collector"
+  prometheus:
+    endpoint: 0.0.0.0:8889 # output for Prometheus (here Prometheus picks up the metrics)
+
+service: # this defines how the receiver, processor and exporter are assembled
+  pipelines: # describes the path of a certain type of data
+    traces:
+      receivers:
+        - otlp
+      processors:
+        - batch
+      exporters:
+        - debug
+
+    metrics:
+      receivers:
+        - otlp
+      processors:
+        - batch
+      exporters:
+        - debug
+        - prometheus
+
+    logs:
+      receivers:
+        - otlp
+      processors:
+        - batch
+      exporters:
+        - debug
