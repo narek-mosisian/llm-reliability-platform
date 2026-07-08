@@ -2,6 +2,7 @@
   "name": "llm-reliability-web",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.32.1",
   "description": "Frontend web application for the LLM Reliability Platform.",
   "scripts": {
     "dev": "next dev",
