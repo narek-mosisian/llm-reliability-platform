@@ -1,0 +1,141 @@
+name: llm-reliability-platform
+
+services:
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: llm-reliability-api
+    environment:
+      APP_ENV: local
+      APP_NAME: llm-reliability-platform
+      APP_DEBUG: "false" # Written as a string to prevent YAML from misinterpreting it.
+      LOG_LEVEL: INFO # Info logs and more important ones
+      API_TITLE: LLM Reliability API
+      OTEL_SERVICE_NAME: llm-reliability-api
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: llm_reliability
+      POSTGRES_USER: llm_reliability
+      POSTGRES_PASSWORD: llm_reliability
+      DATABASE_URL: postgresql+asyncpg://llm_reliability:llm_reliability@postgres:5432/llm_reliability
+      REDIS_URL: redis://redis:6379/0
+      PRIMARY_LLM_PROVIDER: mock
+      FALLBACK_LLM_PROVIDER: mock
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+    restart: unless-stopped # The container restarts automatically unless it is stopped manually.
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: llm-reliability-web
+    environment:
+      NEXT_TELEMETRY_DISABLED: "1" # disables Next.js telemetry
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_started
+    restart: unless-stopped
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: llm-reliability-postgres
+    environment:
+      POSTGRES_DB: llm_reliability
+      POSTGRES_USER: llm_reliability
+      POSTGRES_PASSWORD: llm_reliability
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # The local file `init.sql` is placed into the container. (Postgres executes it during the initial setup)
+      # :ro (Read-only) The container is permitted only to read this file, not modify it.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U llm_reliability -d llm_reliability"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine # lightweight Linux variant
+    container_name: llm-reliability-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    container_name: llm-reliability-prometheus
+    command: # overwrites/supplements the container's start command
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus" # metric data
+      - "--web.enable-lifecycle" # allows certain lifecycle actions via HTTP
+      # e.g. Prometheus can reload its configuration without the container being completely restarted
+      # lifecycle actions are administrative actions performed while Prometheus is running
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      otel-collector:
+        condition: service_started
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    container_name: llm-reliability-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false" # regular users are not allowed to register themselves
+    ports:
+      - "3001:3000" # because the Next.js web app is already using localhost:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      prometheus:
+        condition: service_started
+    restart: unless-stopped
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.115.1
+    container_name: llm-reliability-otel-collector
+    command:
+      - "--config=/etc/otel-collector-config.yml" # startup argument for the OpenTelemetry Collector
+    ports:
+      - "4317:4317" # OTLP over gRPC
+      - "4318:4318" # OTLP over HTTP
+      - "8889:8889" # Prometheus metrics export port of the OpenTelemetry Collector
+    volumes:
+      - ./infra/otel-collector/otel-collector-config.yml:/etc/otel-collector-config.yml:ro
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  redis-data:
+  prometheus-data:
+  grafana-data:
