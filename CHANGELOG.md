@@ -18,6 +18,7 @@ The format follows the spirit of Keep a Changelog, and this project uses semanti
 - FastAPI backend skeleton with versioned API router, health endpoint, OpenAPI schema and tests.
 - Backend core configuration, structured logging setup and consistent API error responses.
 - Next.js web application skeleton with TypeScript, ESLint, basic layout and landing page.
+- Local Docker Compose platform with API, web, PostgreSQL, Redis, Prometheus, Grafana and OpenTelemetry Collector services.
 
 ### Changed
 
