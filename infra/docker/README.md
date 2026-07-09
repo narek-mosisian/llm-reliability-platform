@@ -16,28 +16,51 @@ The local platform includes:
 
 ## Local commands
 
+The recommended local workflow uses Just.
+
+Set up local dependencies:
+
+```bash
+just setup
+```
+
 Validate the Compose configuration:
 
 ```bash
-docker compose config
-````
+just compose-config
+```
 
 Start the local platform:
 
 ```bash
-docker compose up --build
+just dev
 ```
 
 Stop the local platform:
 
 ```bash
-docker compose down
+just down
 ```
 
-Remove local volumes:
+Follow logs:
 
 ```bash
-docker compose down -v
+just logs
+```
+
+Run smoke checks after the platform is running:
+
+```bash
+just smoke
+```
+
+Equivalent Docker commands:
+
+```bash
+docker compose config
+docker compose up --build
+docker compose logs -f --tail=200
+docker compose down
 ```
 
 ## Local URLs
