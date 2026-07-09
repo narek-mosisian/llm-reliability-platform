@@ -35,7 +35,7 @@ jobs:
           python-version: "3.12"
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v8 # installs uv on the runner
+        uses: astral-sh/setup-uv@v8.3.2 # installs uv on the runner
         with:
           enable-cache: true
           # enable caching for uv to speed up subsequent CI runs
