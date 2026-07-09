@@ -23,6 +23,7 @@ The format follows the spirit of Keep a Changelog, and this project uses semanti
 - API CI workflow for Ruff, mypy and pytest validation.
 - Web CI workflow for ESLint and Next.js build validation.
 - Docker build CI workflow for validating API and web image builds.
+- Security scan CI workflow with CodeQL analysis and lightweight repository hygiene checks.
 
 ### Changed
 
