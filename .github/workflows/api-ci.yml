@@ -1,0 +1,54 @@
+name: API CI
+
+on:
+  pull_request:
+    paths:
+      - "apps/api/**" # ** means: all files and subfolders underneath
+      - ".github/workflows/api-ci.yml" # useful for verifying whether workflow changes work
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/api/**"
+      - ".github/workflows/api-ci.yml"
+
+permissions:
+  contents: read # read-only access to the repository content
+
+jobs:
+  api-ci:
+    name: API CI
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: apps/api
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4 # GitHub runner receives the repo code.
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v8 # installs uv on the runner
+        with:
+          enable-cache: true
+          # enable caching for uv to speed up subsequent CI runs
+          # (dependencies do not need to be completely re-downloaded every time)
+
+      - name: Install API dependencies
+        run: uv sync --frozen
+
+      - name: Run Ruff
+        run: uv run ruff check src tests
+
+      - name: Run mypy
+        run: uv run mypy src
+
+      - name: Run pytest
+        run: uv run pytest
