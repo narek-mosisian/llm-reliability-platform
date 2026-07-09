@@ -21,6 +21,7 @@ The format follows the spirit of Keep a Changelog, and this project uses semanti
 - Local Docker Compose platform with API, web, PostgreSQL, Redis, Prometheus, Grafana and OpenTelemetry Collector services.
 - Local smoke test workflow and Just commands for validating the Docker Compose platform.
 - API CI workflow for Ruff, mypy and pytest validation.
+- Web CI workflow for ESLint and Next.js build validation.
 
 ### Changed
 
