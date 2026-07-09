@@ -37,10 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: pnpm # enables dependency caching for pnpm so that subsequent CI runs are faster
-          cache-dependency-path: apps/web/pnpm-lock.yaml
-          # Tell GitHub which lockfile is relevant for the cache.
-          # If this file changes, the cache is updated or renewed.
 
       - name: Set up pnpm
         run: corepack enable && corepack prepare pnpm@10.32.1 --activate
