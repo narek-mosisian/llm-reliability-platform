@@ -14,11 +14,20 @@ down:
 logs:
   docker compose logs -f --tail=200
 
+compose-config:
+  docker compose config
+
+smoke:
+  ./scripts/smoke-local.sh
+
 api-test:
   cd apps/api && uv run pytest
 
 api-lint:
   cd apps/api && uv run ruff check src tests && uv run mypy src
+
+api-format:
+  cd apps/api && uv run ruff format src tests
 
 web-lint:
   cd apps/web && pnpm lint
@@ -26,12 +35,8 @@ web-lint:
 web-build:
   cd apps/web && pnpm build
 
-eval:
-  cd apps/api && uv run python -m llm_reliability.scripts.run_evals
-
-smoke:
-  cd apps/api && uv run python -m llm_reliability.scripts.smoke_test
-
 format:
   cd apps/api && uv run ruff format src tests
-  cd apps/web && pnpm format
+
+eval:
+  cd apps/api && uv run python -m llm_reliability.scripts.run_evals
