@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4 # GitHub runner receives the repo code.
+        uses: actions/checkout@v7 # GitHub runner receives the repo code.
 
       - name: Set up Python
         uses: actions/setup-python@v5
